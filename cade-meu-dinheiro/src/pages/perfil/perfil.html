@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar color="corPrimaria">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Perfil</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="cor-background">
+    <ion-grid>
+        <ion-row>
+          <ion-col>
+          </ion-col>
+          <ion-col col-9 text-center>
+          <img class="image_circle" [src]="fotosrc">
+        </ion-col>
+          <ion-col>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-item class="cor-background">
+          <p text-center style="font-size:  2rem;font-weight: 500;">{{ usuario?.nome }}</p>
+        </ion-item>
+  <ion-card>
+    <ion-card-header color="corPrimaria">
+      Meu histórico
+    </ion-card-header>
+      <ion-item>
+          <ion-icon name='arrow-up' item-start color="corEmprestimo"></ion-icon>
+          <h2>Total de empréstimos</h2>
+          <p>R$ {{formataValor(somaEmprestimos)}}</p>
+        </ion-item>
+        <ion-item>
+          <ion-icon name='arrow-down' item-start color="corDivida"></ion-icon>
+          <h2>Total de dívidas</h2>
+          <p>R$ {{formataValor(somaDividas)}}</p>
+        </ion-item>
+        <ion-item>
+            <ion-icon name='chatbubbles' item-start color="corPrimaria"></ion-icon>
+            <h2>Acordos realizados</h2>
+            <p>{{somaAcordosDividas + somaAcordosEmprestimos}}</p>
+          </ion-item>
+  </ion-card>
+
+  <ion-fab bottom right>
+    <button ion-fab color="corPrimaria" (click)="editaPerfil()">
+      <ion-icon name="create"></ion-icon>
+    </button>
+
+  </ion-fab>
+</ion-content>

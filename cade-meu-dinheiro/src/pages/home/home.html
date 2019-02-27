@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-navbar color="corPrimaria">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="cor-background">
+
+<ion-list>
+  <ion-card>
+    <ion-card-header color="corEmprestimo">
+      Empréstimos
+      <p *ngIf="existeEmprestimo()" class="totalEmprestimo">Total: R$ {{retornaSoma(emprestimos)}}</p>
+    </ion-card-header>
+
+    <ion-item *ngIf="!existeEmprestimo()">
+      <p style="white-space: normal;" text-center>Não há nenhum empréstimo aberto.</p>
+    </ion-item>
+
+    <ion-item *ngFor="let emprestimo of emprestimos">
+      <div id="nome" item-start></div>
+      <ion-thumbnail item-start style="
+      min-width: 65px;
+      min-height:  65px;
+  ">
+    <ion-avatar>
+    <img [src]="retornaFoto('emprestimo', emprestimo)" style="
+    width:  65px;
+    height:  65px;
+    ">
+        </ion-avatar>
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{emprestimo.nomeUsuarioDevedor}}</h2>
+        <div style="overflow: hidden;">
+          <p style="float: left;">Valor: </p>
+          <p class="precoEmprestimo">R$ {{formataValor(emprestimo.valor)}}</p>
+        </div>
+      </ion-label>
+      <button ion-button color="corEmprestimo" clear item-end (click)="modalMostraEmprestimo(emprestimo)">Detalhes</button>
+    </ion-item>
+  </ion-card>
+</ion-list>
+
+  <ion-list>
+    <ion-card>
+      <ion-card-header color="corDivida">
+        Dívidas
+        <p *ngIf="existeDivida()" class="totalDivida">Total: R$ {{retornaSoma(dividas)}}</p>
+      </ion-card-header>
+
+      <ion-item *ngIf="!existeDivida()">
+        <p style="white-space: normal;" text-center>Não há nenhuma dívida aberta.</p>
+      </ion-item>
+  
+      <ion-item *ngFor="let divida of dividas">
+             
+        <div id="nome" item-start></div>
+        <ion-thumbnail item-start style="
+        min-width: 65px;
+        min-height:  65px;
+    ">
+          <ion-avatar>
+            <img [src]="retornaFoto('divida', divida)" style="
+            width:  65px;
+            height:  65px;
+        ">
+          </ion-avatar>
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{divida.nomeUsuarioEmprestador}}</h2>
+          <div style="overflow: hidden;">
+            <p style="float: left;">Valor: </p>
+            <p class="precoDivida">R$ {{formataValor(divida.valor)}}</p>
+          </div>
+        </ion-label>
+        <button ion-button color="corDivida" clear item-end (click)="modalMostraDivida(divida)" >Detalhes</button>
+      </ion-item>
+
+    </ion-card>
+  </ion-list>
+
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <ion-fab bottom right #fab>
+    <button ion-fab color="corPrimaria">
+      <ion-icon name="add"></ion-icon>
+    </button>
+    <ion-fab-list side="top">
+        <button ion-fab (click)="modalAdicionaDivida()" color="corDivida">
+          <ion-icon name="cash" color="light"></ion-icon>
+          <ion-label>Dívida</ion-label>
+        </button>
+        <button ion-fab (click)="modalAdicionaEmprestimo()"color="corEmprestimo">
+          <ion-icon name="cash" color="light"></ion-icon>
+          <ion-label>Empréstimo</ion-label>
+      </button>
+    </ion-fab-list>
+
+  </ion-fab>
+
+</ion-content>
